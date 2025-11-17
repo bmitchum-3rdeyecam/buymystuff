@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.ts",
+    "build": "tsc",
+    "dev": "ts-node app.ts"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +31,19 @@
     "validator": "^13.9.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.21"
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/express-session": "^1.18.2",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.10.1",
+    "@types/pg": "^8.15.6",
+    "@types/uuid": "^10.0.0",
+    "@types/validator": "^13.15.9",
+    "nodemon": "^2.0.21",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }
