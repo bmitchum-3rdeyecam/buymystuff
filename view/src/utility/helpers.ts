@@ -7,7 +7,7 @@ interface TokenData {
 interface SearchData {
   search?: {
     query: string;
-    list: any[];
+    list?: any[];
   };
 }
 
@@ -52,7 +52,7 @@ export function useSearch() {
 
   const saveSearch = (userSearch: SearchData) => {
     sessionStorage.setItem('search', JSON.stringify(userSearch));
-    setSearch(userSearch.search);
+    setSearch(userSearch.search || { query: '', list: [] });
   };
 
   return {
@@ -91,14 +91,11 @@ export async function localCartTotal(): Promise<number> {
   }
   const cart: CartItem[] = JSON.parse(cartString);
   let stringPriceArray: number[] = [];
-  let price: number;
-  let amount: number;
-  let cost: number;
   for (let item of cart) {
-    price = await getProductPrice(item.name);
-    price = Number(price).toFixed(2) as any;
-    amount = item.amount;
-    cost = price*amount;
+    const price = await getProductPrice(item.name);
+    const priceNum = parseFloat(price);
+    const amount = item.amount;
+    const cost = priceNum * amount;
     stringPriceArray.push(cost);
   }
   const priceArray = stringPriceArray.map(Number);

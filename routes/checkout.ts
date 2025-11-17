@@ -5,7 +5,7 @@ import decodeJWT from '../utils/decodeJWT';
 import Stripe from 'stripe';
 
 const stripe = new Stripe('sk_test_51MpCyhDoFFCpZ0bnGFzsp5fR5mWc7Zi6wN5HadQs99Iwwi6VGCHbZQJD4FPqNk6QrI8cQzxUl1XfMXIU5Q5KyuBa00Cgy3yrXJ', {
-  apiVersion: '2024-11-20.acacia',
+  apiVersion: '2022-11-15',
 });
 
 const checkoutRouter = express.Router();
@@ -54,7 +54,7 @@ interface DeleteCartBody {
 const calculateOrderTotal = async (userID: number): Promise<number> => {
 
   const results = await db.query<CartTotal>('SELECT SUM(carts.amount*products.price) AS total FROM carts, products WHERE user_id = $1 AND products.id=carts.product_id', [userID]);
-  const total = (Number(results.rows[0].total.slice(1)).toFixed(2))*100;
+  const total = (parseFloat(results.rows[0].total.slice(1)))*100;
   return total;
 };
 
@@ -62,7 +62,7 @@ const nologinTotal = async (idArray: string[]): Promise<number> => {
   let totalArray: number[] = [];
   for (let item of idArray){
     const results = await db.query<CartTotal>('SELECT SUM(carts.amount*products.price) AS total FROM carts, products WHERE carts.id = $1 AND products.id=carts.product_id', [item]);
-    let itemTotal = (Number(results.rows[0].total.slice(1)).toFixed(2))*100;
+    let itemTotal = (parseFloat(results.rows[0].total.slice(1)))*100;
     totalArray.push(itemTotal);
   }
 

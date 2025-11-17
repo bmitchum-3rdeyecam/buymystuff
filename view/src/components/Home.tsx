@@ -6,7 +6,7 @@ import SearchBar from '../components/Shop/SearchBar';
 interface SearchData {
   search: {
     query: string;
-    list: any[];
+    list?: any[];
   };
 }
 
@@ -14,7 +14,7 @@ interface HomeProps {
   token: string | undefined;
   search: {
     query: string;
-    list: any[];
+    list?: any[];
   };
   setSearch: (data: SearchData) => void;
 }
@@ -59,7 +59,7 @@ export default function Home({ token, search, setSearch }: HomeProps) {
 
   return (
     <div className="container">
-        <SearchBar setSearch={setSearch} search={search}/>
+        <SearchBar setSearch={setSearch} search={search || { query: '', list: [] }}/>
       <h1>Welcome{token && !isLoading ? `, ${first}` : ""}! Let's buy some stuff!</h1>
       <h2>Categories of stuff we sell</h2>
       <div className='categories-container'>

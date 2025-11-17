@@ -28,7 +28,7 @@ interface TokenData {
 interface SearchData {
   search: {
     query: string;
-    list: any[];
+    list?: any[];
   };
 }
 
@@ -39,7 +39,7 @@ function App () {
 
   function handleLogOut() {
     sessionStorage.removeItem("token");
-    setToken({token: null});
+    setToken({token: undefined});
     navigate("/")
   }
 

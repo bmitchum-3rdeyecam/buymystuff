@@ -32,13 +32,12 @@ export default function Cart({ token, setSearch }: CartProps) {
       setCart(cart);
     };
     const fetchTotal = async () => {
-      let cartTotal: number | string;
+      let cartTotal: number | string = 0;
       if(token) {
         cartTotal = await getCartTotal(token)
-      } 
-      if(!token) {
+      } else {
         cartTotal = await localCartTotal()
-      };
+      }
       cartTotal = Number(cartTotal).toFixed(2)
       setTotal(cartTotal);
     }
@@ -66,8 +65,8 @@ export default function Cart({ token, setSearch }: CartProps) {
         thisClicked.closest("tr")?.remove();
         const newCart = cart.filter((item, index) => index !== i);
         setCart(newCart);
-        let cartTotal: string | number = await getCartTotal(token);
-        cartTotal = Number(cartTotal).toFixed(2)
+        const cartTotalValue = await getCartTotal(token);
+        const cartTotal = Number(cartTotalValue).toFixed(2)
         setTotal(cartTotal);
       } else {
         alert("Unable to delete!")
@@ -95,14 +94,14 @@ export default function Cart({ token, setSearch }: CartProps) {
       const id = newCart[i].id;
       const amount = newCart[i].amount
       await updateCart(id as string, amount);
-      let cartTotal: string | number = await getCartTotal(token);
-      cartTotal = Number(cartTotal).toFixed(2)
+      const cartTotalValue = await getCartTotal(token);
+      const cartTotal = Number(cartTotalValue).toFixed(2)
       setTotal(cartTotal);
     }
     if(!token) {
       localStorage.setItem('cart', JSON.stringify(newCart))
-      let cartTotal = await localCartTotal();
-      cartTotal = Number(cartTotal).toFixed(2);
+      const cartTotalValue = await localCartTotal();
+      const cartTotal = Number(cartTotalValue).toFixed(2);
       setTotal(cartTotal);
     }
   };
@@ -121,14 +120,14 @@ export default function Cart({ token, setSearch }: CartProps) {
       const id = newCart[i].id;
       const amount = newCart[i].amount
       await updateCart(id as string, amount);
-      let cartTotal: string | number = await getCartTotal(token);
-      cartTotal = Number(cartTotal).toFixed(2);
+      const cartTotalValue = await getCartTotal(token);
+      const cartTotal = Number(cartTotalValue).toFixed(2);
       setTotal(cartTotal);
     }
     if(!token) {
     localStorage.setItem('cart', JSON.stringify(newCart));
-      let cartTotal = await localCartTotal();
-      cartTotal = Number(cartTotal).toFixed(2)
+      const cartTotalValue = await localCartTotal();
+      const cartTotal = Number(cartTotalValue).toFixed(2)
       setTotal(cartTotal);
     }
   }

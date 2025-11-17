@@ -14,6 +14,10 @@ export default {
     params?: any[],
     callback?: (err: Error, result: QueryResult<T>) => void
   ): Promise<QueryResult<T>> => {
-    return pool.query(text, params, callback);
+    if (callback) {
+      pool.query(text, params || [], callback);
+      return Promise.resolve({} as QueryResult<T>);
+    }
+    return pool.query(text, params || []);
   },
 };

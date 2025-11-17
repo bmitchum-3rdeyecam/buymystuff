@@ -40,7 +40,7 @@ interface CartItem {
 }
 
 productsRouter.get('/', (req: Request, res: Response) => {
-  db.query<Product>('SELECT * FROM products', (error, results) => {
+  db.query<Product>('SELECT * FROM products', [], (error: Error, results: any) => {
     if (error) {
       console.log('error')
       throw error

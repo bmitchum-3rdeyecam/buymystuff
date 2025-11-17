@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import { QueryResult } from 'pg';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import logger from 'morgan';
@@ -68,7 +69,7 @@ app.get('/home', (req: Request, res: Response) => {
 })
 
 app.get('/', (req: Request, res: Response) => {
-  db.query<User>('SELECT * FROM users', (error, results) => {
+  db.query<User>('SELECT * FROM users', [], (error: Error, results: QueryResult<User>) => {
     if (error) {
       console.log('error')
       throw error

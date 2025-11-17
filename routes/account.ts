@@ -116,7 +116,9 @@ accountRouter.put('/details', [
       zip = validator.escape(zip);
       results = await db.query('update users set zip = $1 where id = $2 RETURNING zip', [zip, id]);
     }
-    await res.status(200).json(results.rows[0])
+    if (results) {
+      await res.status(200).json(results.rows[0])
+    }
   } catch (err: any) {
     return err.stack;
   }
@@ -145,7 +147,7 @@ accountRouter.put('/password', [check('password').isLength({ max: 20, min: 5 })]
   const updateText = 'update users set password = $1 where username = $2'
   const hashedPassword = await passwordHasher(password, 10);
   const values = await [hashedPassword, username];
-  await db.query(updateText, values, (error) => {
+  await db.query(updateText, values, (error: Error, results: any) => {
     if (error) {
     console.log('error')
     throw error
