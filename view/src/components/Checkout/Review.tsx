@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import { Link } from 'react-router-dom';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -30,8 +30,8 @@ interface ReviewProps {
   handleRadioChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSame: () => void;
   token: string | undefined;
-  cartItems: JSX.Element;
-  cartTotal: JSX.Element;
+  cartItems: ReactElement;
+  cartTotal: ReactElement;
   placeOrder: () => Promise<void>;
   updateInventory: () => Promise<void>;
   handleDelete: () => Promise<void>;
