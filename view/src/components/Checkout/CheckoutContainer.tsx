@@ -48,7 +48,7 @@ export default function Checkout({ token }: CheckoutContainerProps) {
   const navigate = useNavigate();
   const page = window.location.href;
 
-  const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+\.[a-zA-Z_.+-]+$/, "gm");
+  const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+/=?`{|}~^.-]+@[A-Za-z0-9.-]+\.[a-zA-Z_.+-]+$/, "gm");
 
   const [cart, setCart] = useState<CartItem[]>();
   const [total, setTotal] = useState<string | null>(null);

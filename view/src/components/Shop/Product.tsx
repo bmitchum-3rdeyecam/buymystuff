@@ -52,8 +52,11 @@ export default function Product({ setSearch, search, token }: ProductProps) {
     el.style.animation = '';
     el.style.display = '';
     setTimeout(() => {
-      el.style.display='none';
-      el.style.animation='none';
+      const element = document.getElementById('success');
+      if (element) {
+        element.style.display='none';
+        element.style.animation='none';
+      }
     }, 3000)
   }
 

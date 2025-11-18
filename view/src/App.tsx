@@ -21,17 +21,6 @@ import Confirmation from './components/Confirmation';
 import NotFound from './components/NotFound';
 import { useToken, useSearch } from './utility/helpers';
 
-interface TokenData {
-  token: string | null;
-}
-
-interface SearchData {
-  search: {
-    query: string;
-    list?: any[];
-  };
-}
-
 function App () {
   const navigate = useNavigate();
   const { token, setToken } = useToken();

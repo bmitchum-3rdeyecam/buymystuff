@@ -9,15 +9,12 @@ interface AccountProps {
 export default function Account({ token }: AccountProps) {
 
   const [first, setFirst] = useState<string>('');
-  const [id, setID] = useState<string>('');
   
   useEffect(() => {
     const fetchData = async () => {
       const user = await getUser(token);
       const newFirst = user.first_name;
       setFirst(newFirst);
-      const newID = user.id;
-      setID(newID);
     };
     
     fetchData();
