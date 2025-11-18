@@ -1,12 +1,20 @@
 import { Pool, QueryResult, QueryResultRow } from 'pg';
 
-const pool = new Pool({
+const poolConfig: any = {
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : undefined,
-});
+};
+
+if (process.env.DB_PASSWORD) {
+  poolConfig.password = process.env.DB_PASSWORD;
+}
+
+if (process.env.DB_PORT) {
+  poolConfig.port = parseInt(process.env.DB_PORT);
+}
+
+const pool = new Pool(poolConfig);
 
 export default {
   query: <T extends QueryResultRow = any>(
