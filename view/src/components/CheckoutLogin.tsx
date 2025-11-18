@@ -38,7 +38,7 @@ export default function CheckoutLogin({ setToken }: CheckoutLoginProps) {
           password
       });
       setToken(token);
-      addLocalCartToDB(JSON.parse(JSON.stringify(token.token)));
+      addLocalCartToDB(token.token);
       localStorage.removeItem("cart");
       navigate("/cart");
     }

@@ -84,7 +84,7 @@ export default function Registration({ setToken }: RegistrationProps) {
     }
     setSubmitted(true);
     setToken(response);
-    addLocalCartToDB(JSON.parse(JSON.stringify(response.token)));
+    addLocalCartToDB(response.token);
     localStorage.removeItem("cart");
     navigate("/");
   }

@@ -42,7 +42,7 @@ export default function Login({ setToken }: LoginProps) {
       return;
     }
     setToken(response);
-    addLocalCartToDB(JSON.parse(JSON.stringify(response.token)));
+    addLocalCartToDB(response.token);
     localStorage.removeItem("cart");
     navigate("/");
   }
