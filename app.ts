@@ -1,9 +1,13 @@
+import dotenv from 'dotenv';
+
+// Load environment variables BEFORE importing db and routes
+dotenv.config();
+
 import express, { Request, Response } from 'express';
 import { QueryResult } from 'pg';
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import logger from 'morgan';
-import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
@@ -17,8 +21,6 @@ import accountRouter from './routes/account';
 import cartRouter from './routes/cart';
 import checkoutRouter from './routes/checkout';
 import ordersRouter from './routes/orders';
-
-dotenv.config();
 
 const app = express();
 const store = new session.MemoryStore();
